@@ -26,6 +26,46 @@ button {
   cursor: pointer;
 }
 
+.form-card {
+  margin-top: 24px;
+  padding: 20px;
+  border-radius: 8px;
+  background: #fff;
+}
+
+form {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(150px, 1fr));
+  gap: 12px;
+}
+
+form div {
+  display: grid;
+  gap: 6px;
+}
+
+input {
+  padding: 9px;
+}
+
+.create {
+  align-self: end;
+  color: #fff;
+  background: #16784b;
+}
+
+.error, .success {
+  min-height: 20px;
+}
+
+.error {
+  color: #b42318;
+}
+
+.success {
+  color: #16784b;
+}
+
 .logout {
   color: #fff;
   background: #6b7280;

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 
 interface Libro {
@@ -11,13 +12,16 @@ interface Libro {
 }
 
 @Component({
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   selector: 'app-libro',
   styleUrl: './libro.css',
   templateUrl: './libro.html',
 })
 export class LibroComponent implements OnInit {
   libros: Libro[] = [];
+  nuevoLibro: Libro = this.libroVacio();
+  mensaje = '';
+  error = '';
 
   constructor(private router: Router) {}
 
@@ -39,6 +43,36 @@ export class LibroComponent implements OnInit {
 
   cargarLibros(): void {
     this.libros = JSON.parse(localStorage.getItem('librosBiblioteca') ?? '[]') as Libro[];
+  }
+
+  libroVacio(): Libro {
+    return { id: 0, codigo: '', titulo: '', autor: '', anio: 0 };
+  }
+
+  guardarLibro(): void {
+    this.error = '';
+    this.mensaje = '';
+
+    const codigo = this.nuevoLibro.codigo;
+    const titulo = this.nuevoLibro.titulo.trim();
+    const autor = this.nuevoLibro.autor.trim();
+    const anioTexto = String(this.nuevoLibro.anio);
+    const anio = Number(this.nuevoLibro.anio);
+
+    if (!codigo.trim() || !titulo || !autor || !/^\d{4}$/.test(anioTexto) || !Number.isInteger(anio) || anio < 1000 || anio > 9999) {
+      this.error = 'Complete los campos con valores válidos.';
+      return;
+    }
+
+    const nuevoId = this.libros.reduce((maximo, libro) => Math.max(maximo, libro.id), 0) + 1;
+    this.libros.push({ id: nuevoId, codigo, titulo, autor, anio });
+    this.guardarCambios();
+    this.nuevoLibro = this.libroVacio();
+    this.mensaje = 'Libro registrado correctamente.';
+  }
+
+  guardarCambios(): void {
+    localStorage.setItem('librosBiblioteca', JSON.stringify(this.libros));
   }
 
   cerrarSesion(): void {
