@@ -1,0 +1,72 @@
+.catalogo-page {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 32px 20px;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+header h1 {
+  margin-bottom: 4px;
+}
+
+header p {
+  margin-top: 0;
+}
+
+button {
+  padding: 8px 12px;
+  border: 0;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.logout {
+  color: #fff;
+  background: #6b7280;
+}
+
+.table-container {
+  overflow-x: auto;
+  margin-top: 24px;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 4px 20px rgba(36, 50, 74, 0.08);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 12px;
+  border-bottom: 1px solid #dce3ec;
+  text-align: left;
+}
+
+th {
+  background: #1f5e91;
+  color: #fff;
+}
+
+.edit {
+  margin-right: 6px;
+  color: #fff;
+  background: #d97706;
+}
+
+.delete {
+  color: #fff;
+  background: #b42318;
+}
+
+.empty {
+  padding: 20px;
+  text-align: center;
+}

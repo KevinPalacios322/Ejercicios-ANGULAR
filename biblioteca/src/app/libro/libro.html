@@ -1,1 +1,38 @@
-<p>libro works!</p>
+<main class="catalogo-page">
+  <header>
+    <div>
+      <h1>Catálogo de biblioteca</h1>
+      <p>Total de registros: {{ libros.length }}</p>
+    </div>
+    <button class="logout" type="button" (click)="cerrarSesion()">Cerrar sesión</button>
+  </header>
+
+  <section class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Código</th>
+          <th>Título</th>
+          <th>Autor</th>
+          <th>Año</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let libro of libros">
+          <td>{{ libro.id }}</td>
+          <td>{{ libro.codigo }}</td>
+          <td>{{ libro.titulo }}</td>
+          <td>{{ libro.autor }}</td>
+          <td>{{ libro.anio }}</td>
+          <td>
+            <button type="button" class="edit">Editar</button>
+            <button type="button" class="delete">Eliminar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="empty" *ngIf="libros.length === 0">No hay libros registrados.</p>
+  </section>
+</main>
