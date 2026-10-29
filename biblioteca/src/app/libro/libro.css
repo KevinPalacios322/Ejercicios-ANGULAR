@@ -54,6 +54,12 @@ input {
   background: #16784b;
 }
 
+.cancel {
+  align-self: end;
+  color: #fff;
+  background: #6b7280;
+}
+
 .error, .success {
   min-height: 20px;
 }

@@ -20,6 +20,7 @@ interface Libro {
 export class LibroComponent implements OnInit {
   libros: Libro[] = [];
   nuevoLibro: Libro = this.libroVacio();
+  libroEditandoId: number | null = null;
   mensaje = '';
   error = '';
 
@@ -64,11 +65,32 @@ export class LibroComponent implements OnInit {
       return;
     }
 
-    const nuevoId = this.libros.reduce((maximo, libro) => Math.max(maximo, libro.id), 0) + 1;
-    this.libros.push({ id: nuevoId, codigo, titulo, autor, anio });
+    if (this.libroEditandoId === null) {
+      const nuevoId = this.libros.reduce((maximo, libro) => Math.max(maximo, libro.id), 0) + 1;
+      this.libros.push({ id: nuevoId, codigo, titulo, autor, anio });
+      this.mensaje = 'Libro registrado correctamente.';
+    } else {
+      const indice = this.libros.findIndex(libro => libro.id === this.libroEditandoId);
+      if (indice >= 0) {
+        this.libros[indice] = { id: this.libroEditandoId, codigo, titulo, autor, anio };
+      }
+      this.mensaje = 'Libro actualizado correctamente.';
+    }
+
     this.guardarCambios();
+    this.cancelarEdicion();
+  }
+
+  editarLibro(libro: Libro): void {
+    this.libroEditandoId = libro.id;
+    this.nuevoLibro = { ...libro };
+    this.error = '';
+    this.mensaje = '';
+  }
+
+  cancelarEdicion(): void {
+    this.libroEditandoId = null;
     this.nuevoLibro = this.libroVacio();
-    this.mensaje = 'Libro registrado correctamente.';
   }
 
   guardarCambios(): void {
