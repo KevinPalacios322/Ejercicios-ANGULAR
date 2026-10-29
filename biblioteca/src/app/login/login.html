@@ -1,0 +1,17 @@
+<main class="login-page">
+  <section class="login-card">
+    <h1>Biblioteca escolar</h1>
+    <p>Ingrese sus datos para administrar el catálogo.</p>
+
+    <form (ngSubmit)="iniciarSesion()">
+      <label for="usuario">Usuario</label>
+      <input id="usuario" name="usuario" [(ngModel)]="usuario" autocomplete="username" required>
+
+      <label for="clave">Contraseña</label>
+      <input id="clave" name="clave" type="password" [(ngModel)]="clave" autocomplete="current-password" required>
+
+      <p class="error" role="alert">{{ error }}</p>
+      <button type="submit">Iniciar sesión</button>
+    </form>
+  </section>
+</main>
