@@ -93,6 +93,19 @@ export class LibroComponent implements OnInit {
     this.nuevoLibro = this.libroVacio();
   }
 
+  eliminarLibro(libro: Libro): void {
+    if (!window.confirm(`¿Eliminar el libro "${libro.titulo}"?`)) {
+      return;
+    }
+
+    this.libros = this.libros.filter(registro => registro.id !== libro.id);
+    if (this.libroEditandoId === libro.id) {
+      this.cancelarEdicion();
+    }
+    this.guardarCambios();
+    this.mensaje = 'Libro eliminado correctamente.';
+  }
+
   guardarCambios(): void {
     localStorage.setItem('librosBiblioteca', JSON.stringify(this.libros));
   }
