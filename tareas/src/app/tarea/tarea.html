@@ -21,7 +21,7 @@
     </select>
     </div><br>
 
-    <button type="button" (click)="IngresarEstudiante()">Guardar Estudiante</button>
+    <button type="button" (click)="IngresarTarea()">Guardar Tarea</button>
 
 </Form></div>
 
@@ -33,12 +33,13 @@
             <th>Descripcion</th>
             <th>FechaLimite</th>
             <th>Estado</th>
+            <th>Opciones</th>
         </tr>
 
 
     </thead>
     <tbody>
-        @for (tarea of ListaTareas; track $index)  {
+        @for (tarea of ListaTareasD; track $index)  {
 
             
                
@@ -48,6 +49,7 @@
                     <th>{{tarea.descripcion}}</th>
                     <th>{{tarea.FechaLimite}}</th>
                     <th>{{tarea.estado}}</th>
+                    <th><Button type="button" (click)="EliminarTarea(tarea.id)">Eliminar</Button></th>
                 </tr>
 
             

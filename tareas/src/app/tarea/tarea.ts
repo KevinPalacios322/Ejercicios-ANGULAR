@@ -30,57 +30,64 @@ export class Tarea implements OnInit {
   descripcion: string = '';
   FechaLimite: string = '';
   estado: string = '';
-  ListaTareas: tarea[]=[]
-  ListaTareasD : any[]=[]; 
+  ListaTareasD : tarea[]=[]; 
+  IdEl: number = 0;
   
 
-  IngresarEstudiante(){
+  IngresarTarea(){
 
     if(this.titulo.trim() === '' || this.descripcion.trim() === '' || this.FechaLimite.trim() === '' || this.estado.trim() === ''){
 
       alert("Error al Ingresar: Campos vacios")
 
       return
-    }else{
-
-      for( let x = 0; x < this.ListaTareasD.length; x++ ){
-
-        if (this.id === this.ListaTareas[x].id){
-          this.id ++;
-
-        }
-
-      }
-
     }
 
+    let UltId =0;
+    for (let x = 0; x < this.ListaTareasD.length; x++)
+      {
+        if (UltId < this.ListaTareasD[x].id)
+          UltId = this.ListaTareasD[x].id;
+
+      } 
+    
+
     const NuevaTarea = {
-      id :  this.ListaTareas.length + 1,
+      id :  UltId + 1,
       titulo : this.titulo,
       descripcion : this.descripcion,
       FechaLimite : this.FechaLimite,
       estado: this.estado
 
     }
-    this.ListaTareas.push(NuevaTarea)
-    localStorage.setItem('RegistrosTareas',JSON.stringify(this.ListaTareas))
+    
+    this.ListaTareasD.push(NuevaTarea)
+    localStorage.setItem('RegistrosTareasD',JSON.stringify(this.ListaTareasD))
 
 
    }
 
-  ngOnInit(): void {
-    
-    const datos = localStorage.getItem('RegistrosTareas')
-    this.ListaTareasD = JSON.parse(datos || '[]');
-
-    if (datos){
-
-      this.ListaTareas = JSON.parse(datos);
-
+   EliminarTarea(id:number){
+    if(!confirm("Desea eliminar la tarea?")){
+      return;
 
     }
+
+    for (let y=0; y < this.ListaTareasD.length ;y++){
+
+      if(id === this.ListaTareasD[y].id ){
+
+        this.ListaTareasD.splice(y,1);
+        break;
+       }
+    }
+    localStorage.setItem('RegistrosTareasD', JSON.stringify(this.ListaTareasD));
+   }
+  ngOnInit(): void {
     
-    
+    const datos = localStorage.getItem('RegistrosTareasD')
+    this.ListaTareasD = JSON.parse(datos || '[]');
+
     if(localStorage.getItem('sesionTareas') !== 'true'){
 
       
