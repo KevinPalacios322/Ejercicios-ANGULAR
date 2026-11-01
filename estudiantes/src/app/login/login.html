@@ -1,0 +1,12 @@
+<h1>Login</h1>
+
+<form>
+    <label for="usuario">usuario</label>
+    <input type="text" [(ngModel)]="usuario" name="usuario" id="usuario">
+
+    <label for="clave">Contraseña</label>
+    <input type="password" [(ngModel)]="clave" name="clave" id="clave">
+
+    <button type="button" (click)="IniciarSesion()">Iniciar Sesion</button>
+
+</form>
