@@ -13,12 +13,18 @@
         <label for="existencia">Existencias: </label>
         <input id="existencia" type="number" name="existencia" [(ngModel)]="existencia" placeholder="Ingrese Existencias">
 
-        <button type="button" (click)="GuardarProducto()">Guardar</button>
+        <button type="button" (click)="GuardarProducto()">Guardar</button> 
+        <button
+  type="button"
+  (click)="ActualizarProducto()"
+  [disabled]="idEditar === null">
+  Actualizar
+</button>
     </form>
 
     <h2>Productos Registrados</h2>
 
-   <
+   
 
 <table border="1" cellpadding="10" cellspacing="0">
   <thead>
@@ -40,7 +46,7 @@
         <td>{{ producto.nombre }}</td>
         <td>{{ producto.precio }}</td>
         <td>{{ producto.existencia }}</td>
-        <td><button type="button"></button></td>
+        <td> <button type="button" (click)="EditarProducto(producto)">Editar</button></td>
       </tr>
     }
   </tbody>

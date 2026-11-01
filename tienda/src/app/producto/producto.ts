@@ -30,6 +30,7 @@ export class Producto implements OnInit {
   nombre : string = '';
   precio : number = 0 ;
   existencia : number = 0;
+  idEditar :number | null = null;
   productos: any[] = []
 
   GuardarProducto(){
@@ -57,6 +58,42 @@ export class Producto implements OnInit {
 
   }
 
+  EditarProducto(producto:any){
+
+    this.idEditar =producto.id;
+    this.codigo = producto.codigo;
+    this.nombre = producto.nombre;
+    this.precio = producto.precio;
+    this.existencia = producto.existencia; 
+
+
+  }
+
+  ActualizarProducto() {
+  if (this.idEditar === null) {
+    return;
+  }
+
+  const producto = this.productos.find((p: any) => p.id === this.idEditar);
+
+  if (producto) {
+    producto.codigo = this.codigo;
+    producto.nombre = this.nombre;
+    producto.precio = this.precio;
+    producto.existencia = this.existencia;
+
+    localStorage.setItem('productos',JSON.stringify(this.productos));
+
+    this.idEditar = null;
+
+    this.codigo = '';
+    this.nombre = '';
+    this.precio = 0;
+    this.existencia = 0;
+
+    alert('Producto actualizado correctamente');
+  }
+}
 
 
 
