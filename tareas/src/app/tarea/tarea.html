@@ -1,1 +1,59 @@
-<p>tarea works!</p>
+<H1>AGREGAR TAREA</H1>
+
+<div class="formulario" ><Form>
+    <div class="campo"><label for="titulo">Titulo</label>
+    <input type="text" [(ngModel)]="titulo" name="titulo" id="titulo">
+    </div><br>
+
+    <div class="campo "><label for="descripcion">Descripcion</label>
+    <input type="text" [(ngModel)]="descripcion" name="descripcion" id="descripcion">
+    </div><br>
+
+    <div class="campo" ><label for="FechaLimite">Fecha Limite</label>
+    <input type="date" [(ngModel)]="FechaLimite" name="FechaLimite" id="FechaLimite">
+    </div><br>
+
+    <div class="campo"><label>Estado</label>
+    <select [(ngModel)]="estado" >
+        <option value="Pendiente">Pendiente</option>
+        <option value="Completada">Completada</option>
+
+    </select>
+    </div><br>
+
+    <button type="button" (click)="IngresarEstudiante()">Guardar Estudiante</button>
+
+</Form></div>
+
+<table>
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Titulo</th>
+            <th>Descripcion</th>
+            <th>FechaLimite</th>
+            <th>Estado</th>
+        </tr>
+
+
+    </thead>
+    <tbody>
+        @for (tarea of ListaTareas; track $index)  {
+
+            
+               
+                <tr>
+                    <th>{{tarea.id}}</th>
+                    <th>{{tarea.titulo}}</th>
+                    <th>{{tarea.descripcion}}</th>
+                    <th>{{tarea.FechaLimite}}</th>
+                    <th>{{tarea.estado}}</th>
+                </tr>
+
+            
+        }
+       
+
+    </tbody>
+
+</table>
