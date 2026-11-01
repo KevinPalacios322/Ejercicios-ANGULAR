@@ -24,6 +24,7 @@ export class Mascota implements OnInit {
 
     if (this.nombre.trim() === '' || this.especie.trim() === '' ||
       !Number.isInteger(this.edad) || this.edad < 0 || this.propietario.trim() === '') {
+      alert("Error al ingresar los datos");
       return;
     }
 
@@ -59,6 +60,7 @@ export class Mascota implements OnInit {
 
     if (this.nombre.trim() === '' || this.especie.trim() === '' ||
       !Number.isInteger(this.edad) || this.edad < 0 || this.propietario.trim() === '') {
+      alert("Error al ingresar los datos");
       return;
     }
 
@@ -88,6 +90,21 @@ export class Mascota implements OnInit {
     this.especie = '';
     this.edad = 0;
     this.propietario = '';
+  }
+
+  EliminarMascota(id: number) {
+    const confirmar = confirm('¿Desea eliminar esta mascota?');
+
+    if (!confirmar) {
+      return;
+    }
+
+    this.mascotas = this.mascotas.filter((mascota: any) => mascota.id !== id);
+    localStorage.setItem('mascotasVeterinaria', JSON.stringify(this.mascotas));
+
+    if (this.idEditar === id) {
+      this.CancelarEdicion();
+    }
   }
 
   ngOnInit(): void {
