@@ -46,10 +46,12 @@
         <td>{{ producto.nombre }}</td>
         <td>{{ producto.precio }}</td>
         <td>{{ producto.existencia }}</td>
-        <td> <button type="button" (click)="EditarProducto(producto)">Editar</button></td>
+        <td>
+          <button type="button" (click)="EditarProducto(producto)">Editar</button>
+          <button type="button" (click)="EliminarProducto(producto)">Eliminar</button>
+        </td>
       </tr>
     }
   </tbody>
 </table>
     <button  (click)="CerrarSesion()">CerrarSesion</button>
-

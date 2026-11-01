@@ -95,6 +95,26 @@ export class Producto implements OnInit {
   }
 }
 
+  EliminarProducto(producto:any) {
+
+    if (!confirm(`¿Eliminar el producto "${producto.nombre}"?`)) {
+      return;
+    }
+
+    this.productos = this.productos.filter((p: any) => p.id !== producto.id);
+    localStorage.setItem('productos', JSON.stringify(this.productos));
+
+    if (this.idEditar === producto.id) {
+      this.idEditar = null;
+      this.codigo = '';
+      this.nombre = '';
+      this.precio = 0;
+      this.existencia = 0;
+    }
+
+    alert('Producto eliminado correctamente');
+  }
+
 
 
   ngOnInit(): void {
