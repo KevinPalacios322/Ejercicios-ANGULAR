@@ -97,6 +97,21 @@ export class Estudiantes implements OnInit {
     this.fechaIngreso = '';
   }
 
+  EliminarEstudiante(estudiante: Estudiante) {
+    if (!confirm(`¿Eliminar el estudiante "${estudiante.nombre}"?`)) {
+      return;
+    }
+
+    this.estudiantes = this.estudiantes.filter((e: Estudiante) => e.id !== estudiante.id);
+    localStorage.setItem('registrosEstudiantes', JSON.stringify(this.estudiantes));
+
+    if (this.idEditar === estudiante.id) {
+      this.CancelarEdicion();
+    }
+
+    alert('Estudiante eliminado correctamente');
+  }
+
   ngOnInit(): void {
     this.SesionIniciada = localStorage.getItem('sesionEstudiantes') === 'activa';
 
