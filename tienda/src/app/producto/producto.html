@@ -16,5 +16,34 @@
         <button type="button" (click)="GuardarProducto()">Guardar</button>
     </form>
 
+    <h2>Productos Registrados</h2>
+
+   <
+
+<table border="1" cellpadding="10" cellspacing="0">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Código</th>
+      <th>Nombre</th>
+      <th>Precio</th>
+      <th>Existencias</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    @for (producto of productos; track producto.id) {
+      <tr>
+        <td>{{ producto.id }}</td>
+        <td>{{ producto.codigo }}</td>
+        <td>{{ producto.nombre }}</td>
+        <td>{{ producto.precio }}</td>
+        <td>{{ producto.existencia }}</td>
+        <td><button type="button"></button></td>
+      </tr>
+    }
+  </tbody>
+</table>
     <button  (click)="CerrarSesion()">CerrarSesion</button>
 

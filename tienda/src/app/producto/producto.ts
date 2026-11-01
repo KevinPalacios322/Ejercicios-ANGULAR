@@ -61,6 +61,12 @@ export class Producto implements OnInit {
 
 
   ngOnInit(): void {
+    const datos =localStorage.getItem('productos');
+    if (datos){
+
+      this.productos = JSON.parse(datos);
+
+    }
     this.SesionIniciada = history.state?.SesionIniciada === true;
 
     if(!this.SesionIniciada){
