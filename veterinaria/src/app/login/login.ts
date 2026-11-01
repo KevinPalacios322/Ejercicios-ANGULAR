@@ -17,9 +17,10 @@ export class Login {
 
   IniciarSesion(){
 
-    if (this.usuario === 'veterinario' && this.clave === 'mascota123'){
+    if (this.usuario === 'veterinario' && this.clave === 'mascotas123'){
       this.SesionIniciada = true;
-      this.router.navigate(['/Mascota'],{state : {SesionIniciada : this.SesionIniciada}} );
+      localStorage.setItem('sesionVeterinaria', 'activa');
+      this.router.navigate(['/Mascota']);
 
 
 

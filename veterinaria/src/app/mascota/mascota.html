@@ -1,1 +1,40 @@
-<p>mascota works!</p>
+<form>
+  <label for="nombre">Nombre:</label>
+  <input id="nombre" type="text" name="nombre" [(ngModel)]="nombre" placeholder="Ingrese el nombre">
+
+  <label for="especie">Especie:</label>
+  <input id="especie" type="text" name="especie" [(ngModel)]="especie" placeholder="Ingrese la especie">
+
+  <label for="edad">Edad:</label>
+  <input id="edad" type="number" name="edad" [(ngModel)]="edad" placeholder="Ingrese la edad">
+
+  <label for="propietario">Propietario:</label>
+  <input id="propietario" type="text" name="propietario" [(ngModel)]="propietario" placeholder="Ingrese el propietario">
+
+  <button type="button" (click)="GuardarMascota()">Guardar</button>
+</form>
+
+<h2>Mascotas Registradas</h2>
+
+<table border="1" cellpadding="10" cellspacing="0">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nombre</th>
+      <th>Especie</th>
+      <th>Edad</th>
+      <th>Propietario</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (mascota of mascotas; track mascota.id) {
+      <tr>
+        <td>{{ mascota.id }}</td>
+        <td>{{ mascota.nombre }}</td>
+        <td>{{ mascota.especie }}</td>
+        <td>{{ mascota.edad }}</td>
+        <td>{{ mascota.propietario }}</td>
+      </tr>
+    }
+  </tbody>
+</table>
