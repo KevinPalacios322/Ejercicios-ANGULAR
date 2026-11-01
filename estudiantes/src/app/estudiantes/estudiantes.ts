@@ -26,6 +26,7 @@ export class Estudiantes implements OnInit {
   carrera: string = '';
   fechaIngreso: string = '';
   estudiantes: Estudiante[] = [];
+  idEditar: number | null = null;
 
   GuardarEstudiante() {
     if (this.cuenta.trim() === '' || this.nombre.trim() === '' ||
@@ -44,6 +45,52 @@ export class Estudiantes implements OnInit {
     this.estudiantes.push(nuevoEstudiante);
     localStorage.setItem('registrosEstudiantes', JSON.stringify(this.estudiantes));
 
+    this.cuenta = '';
+    this.nombre = '';
+    this.carrera = '';
+    this.fechaIngreso = '';
+  }
+
+  EditarEstudiante(estudiante: Estudiante) {
+    this.idEditar = estudiante.id;
+    this.cuenta = estudiante.cuenta;
+    this.nombre = estudiante.nombre;
+    this.carrera = estudiante.carrera;
+    this.fechaIngreso = estudiante.fechaIngreso;
+  }
+
+  ActualizarEstudiante() {
+    if (this.idEditar === null) {
+      return;
+    }
+
+    if (this.cuenta.trim() === '' || this.nombre.trim() === '' ||
+      this.carrera.trim() === '' || this.fechaIngreso === '') {
+      return;
+    }
+
+    const estudiante = this.estudiantes.find((e: Estudiante) => e.id === this.idEditar);
+
+    if (estudiante) {
+      estudiante.cuenta = this.cuenta;
+      estudiante.nombre = this.nombre;
+      estudiante.carrera = this.carrera;
+      estudiante.fechaIngreso = this.fechaIngreso;
+
+      localStorage.setItem('registrosEstudiantes', JSON.stringify(this.estudiantes));
+
+      this.idEditar = null;
+      this.cuenta = '';
+      this.nombre = '';
+      this.carrera = '';
+      this.fechaIngreso = '';
+
+      alert('Estudiante actualizado correctamente');
+    }
+  }
+
+  CancelarEdicion() {
+    this.idEditar = null;
     this.cuenta = '';
     this.nombre = '';
     this.carrera = '';

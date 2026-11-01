@@ -12,6 +12,18 @@
   <input id="fechaIngreso" type="date" name="fechaIngreso" [(ngModel)]="fechaIngreso">
 
   <button type="button" (click)="GuardarEstudiante()">Guardar</button>
+  <button
+    type="button"
+    (click)="ActualizarEstudiante()"
+    [disabled]="idEditar === null">
+    Actualizar
+  </button>
+  <button
+    type="button"
+    (click)="CancelarEdicion()"
+    [disabled]="idEditar === null">
+    Cancelar
+  </button>
 </form>
 
 <h2>Estudiantes Registrados</h2>
@@ -24,6 +36,7 @@
       <th>Nombre</th>
       <th>Carrera</th>
       <th>Fecha de ingreso</th>
+      <th>Acciones</th>
     </tr>
   </thead>
   <tbody>
@@ -34,6 +47,9 @@
         <td>{{ estudiante.nombre }}</td>
         <td>{{ estudiante.carrera }}</td>
         <td>{{ estudiante.fechaIngreso }}</td>
+        <td>
+          <button type="button" (click)="EditarEstudiante(estudiante)">Editar</button>
+        </td>
       </tr>
     }
   </tbody>
