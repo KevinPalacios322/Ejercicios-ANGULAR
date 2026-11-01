@@ -18,6 +18,7 @@ export class Mascota implements OnInit {
   edad: number = 0;
   propietario: string = '';
   mascotas: any[] = [];
+  idEditar: number | null = null;
 
   GuardarMascota() {
 
@@ -37,6 +38,52 @@ export class Mascota implements OnInit {
     this.mascotas.push(nuevaMascota);
     localStorage.setItem('mascotasVeterinaria', JSON.stringify(this.mascotas));
 
+    this.nombre = '';
+    this.especie = '';
+    this.edad = 0;
+    this.propietario = '';
+  }
+
+  EditarMascota(mascota: any) {
+    this.idEditar = mascota.id;
+    this.nombre = mascota.nombre;
+    this.especie = mascota.especie;
+    this.edad = mascota.edad;
+    this.propietario = mascota.propietario;
+  }
+
+  ActualizarMascota() {
+    if (this.idEditar === null) {
+      return;
+    }
+
+    if (this.nombre.trim() === '' || this.especie.trim() === '' ||
+      !Number.isInteger(this.edad) || this.edad < 0 || this.propietario.trim() === '') {
+      return;
+    }
+
+    const mascota = this.mascotas.find((m: any) => m.id === this.idEditar);
+
+    if (mascota) {
+      mascota.nombre = this.nombre;
+      mascota.especie = this.especie;
+      mascota.edad = this.edad;
+      mascota.propietario = this.propietario;
+
+      localStorage.setItem('mascotasVeterinaria', JSON.stringify(this.mascotas));
+
+      this.idEditar = null;
+      this.nombre = '';
+      this.especie = '';
+      this.edad = 0;
+      this.propietario = '';
+
+      alert('Mascota actualizada correctamente');
+    }
+  }
+
+  CancelarEdicion() {
+    this.idEditar = null;
     this.nombre = '';
     this.especie = '';
     this.edad = 0;

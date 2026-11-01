@@ -12,6 +12,18 @@
   <input id="propietario" type="text" name="propietario" [(ngModel)]="propietario" placeholder="Ingrese el propietario">
 
   <button type="button" (click)="GuardarMascota()">Guardar</button>
+  <button
+    type="button"
+    (click)="ActualizarMascota()"
+    [disabled]="idEditar === null">
+    Actualizar
+  </button>
+  <button
+    type="button"
+    (click)="CancelarEdicion()"
+    [disabled]="idEditar === null">
+    Cancelar
+  </button>
 </form>
 
 <h2>Mascotas Registradas</h2>
@@ -24,6 +36,7 @@
       <th>Especie</th>
       <th>Edad</th>
       <th>Propietario</th>
+      <th>Acciones</th>
     </tr>
   </thead>
   <tbody>
@@ -34,6 +47,9 @@
         <td>{{ mascota.especie }}</td>
         <td>{{ mascota.edad }}</td>
         <td>{{ mascota.propietario }}</td>
+        <td>
+          <button type="button" (click)="EditarMascota(mascota)">Editar</button>
+        </td>
       </tr>
     }
   </tbody>
