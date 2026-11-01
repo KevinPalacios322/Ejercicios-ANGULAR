@@ -1,1 +1,40 @@
-<p>estudiantes works!</p>
+<form>
+  <label for="cuenta">Cuenta:</label>
+  <input id="cuenta" type="text" name="cuenta" [(ngModel)]="cuenta" placeholder="Ingrese la cuenta">
+
+  <label for="nombre">Nombre:</label>
+  <input id="nombre" type="text" name="nombre" [(ngModel)]="nombre" placeholder="Ingrese el nombre">
+
+  <label for="carrera">Carrera:</label>
+  <input id="carrera" type="text" name="carrera" [(ngModel)]="carrera" placeholder="Ingrese la carrera">
+
+  <label for="fechaIngreso">Fecha de ingreso:</label>
+  <input id="fechaIngreso" type="date" name="fechaIngreso" [(ngModel)]="fechaIngreso">
+
+  <button type="button" (click)="GuardarEstudiante()">Guardar</button>
+</form>
+
+<h2>Estudiantes Registrados</h2>
+
+<table border="1" cellpadding="10" cellspacing="0">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Cuenta</th>
+      <th>Nombre</th>
+      <th>Carrera</th>
+      <th>Fecha de ingreso</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (estudiante of estudiantes; track estudiante.id) {
+      <tr>
+        <td>{{ estudiante.id }}</td>
+        <td>{{ estudiante.cuenta }}</td>
+        <td>{{ estudiante.nombre }}</td>
+        <td>{{ estudiante.carrera }}</td>
+        <td>{{ estudiante.fechaIngreso }}</td>
+      </tr>
+    }
+  </tbody>
+</table>

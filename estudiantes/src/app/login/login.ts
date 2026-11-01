@@ -1,7 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { escapeRegExp } from '@angular/compiler';
 
 @Component({
   imports: [FormsModule],
@@ -22,7 +21,8 @@ export class Login{
     
    if(this.usuario === 'registro' && this.clave === 'alumnos123'){
       this.SesionIniciada = true;
-      this.router.navigate(['/Estudiantes'],{state : {SesionIniciada : this.SesionIniciada}});
+      localStorage.setItem('sesionEstudiantes', 'activa');
+      this.router.navigate(['/Estudiantes']);
 
     }else{
       alert("Usuario o Contraseña Incorrecta");
