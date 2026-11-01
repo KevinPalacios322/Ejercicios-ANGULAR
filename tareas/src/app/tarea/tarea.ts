@@ -24,6 +24,7 @@ interface tarea{
 
 export class Tarea implements OnInit {
   
+  editando: boolean = false;
   router = inject(Router);
   id: number = 0 ;
   titulo: string = '';
@@ -32,6 +33,31 @@ export class Tarea implements OnInit {
   estado: string = '';
   ListaTareasD : tarea[]=[]; 
   IdEl: number = 0;
+
+  TareaEditar: tarea = {
+    id: 0,
+    titulo: '',
+    descripcion: '',
+    FechaLimite: '',
+    estado: ''
+
+
+  }
+  
+
+  ngOnInit(): void {
+    
+    const datos = localStorage.getItem('RegistrosTareasD')
+    this.ListaTareasD = JSON.parse(datos || '[]');
+
+    if(localStorage.getItem('sesionTareas') !== 'true'){
+
+      
+      this.router.navigate(['']);
+      return
+    }
+
+  }
   
 
   IngresarTarea(){
@@ -83,19 +109,41 @@ export class Tarea implements OnInit {
     }
     localStorage.setItem('RegistrosTareasD', JSON.stringify(this.ListaTareasD));
    }
-  ngOnInit(): void {
-    
-    const datos = localStorage.getItem('RegistrosTareasD')
-    this.ListaTareasD = JSON.parse(datos || '[]');
 
-    if(localStorage.getItem('sesionTareas') !== 'true'){
-
-      
-      this.router.navigate(['']);
-      return
+   
+   Apartado_Tarea(id: number) {
+  for (let x = 0; x < this.ListaTareasD.length; x++) {
+    if (this.ListaTareasD[x].id === id) {
+      this.TareaEditar = {...this.ListaTareasD[x]} ;
+      this.editando = true;
+      return;
     }
-
   }
+}
+
+CancelarActu() {
+  this.editando = false;
+}
+
+ActualizarTarea(id: number) {
+  if (!confirm('¿Desea actualizar los datos?')) {
+    return;
+  }
+
+  for (let x = 0; x < this.ListaTareasD.length; x++) {
+    if (this.ListaTareasD[x].id === id) {
+      this.ListaTareasD[x] = {...this.TareaEditar};
+
+      localStorage.setItem(
+        'RegistrosTareasD',
+        JSON.stringify(this.ListaTareasD)
+      );
+
+      this.editando = false;
+      return;
+    }
+  }
+}
 
 }
 

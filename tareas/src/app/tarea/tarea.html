@@ -50,6 +50,7 @@
                     <th>{{tarea.FechaLimite}}</th>
                     <th>{{tarea.estado}}</th>
                     <th><Button type="button" (click)="EliminarTarea(tarea.id)">Eliminar</Button></th>
+                     <th><Button type="button" (click)="Apartado_Tarea(tarea.id)">Actualizar</Button></th>
                 </tr>
 
             
@@ -59,3 +60,33 @@
     </tbody>
 
 </table>
+<br>
+
+@if (editando) {
+
+    <h1>Actualizar Datos</h1>
+
+    <div class="campo"><label for="titulo">Titulo</label>
+    <input type="text" [(ngModel)]="TareaEditar.titulo" placeholder="TareaEditar.titulo">
+    </div><br>
+
+    <div class="campo "><label for="descripcion">Descripcion</label>
+    <input type="text" [(ngModel)]="TareaEditar.descripcion" placeholder="TareaEditar.descripcion">
+    </div><br>
+
+    <div class="campo" ><label for="FechaLimite">Fecha Limite</label>
+    <input type="date" [(ngModel)]="TareaEditar.FechaLimite" placeholder="TareaEditar.FechaLimite">
+    </div><br>
+
+    <div class="campo"><label>Estado</label>
+    <select [(ngModel)]="TareaEditar.estado" >
+        <option value="Pendiente">Pendiente</option>
+        <option value="Completada">Completada</option>
+
+    </select>
+    </div><br>
+
+    <button type="button" (click)="ActualizarTarea(TareaEditar.id)">Actualizar Tarea</button>
+    <button (click)="CancelarActu()" >Cancelar</button>
+
+}
